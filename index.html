@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HIV Services in San Diego</title>
+<title>DEMO - San Diego Care Locations</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -48,7 +48,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">HIV Services in San Diego</h1>
+<h1 class="title">DEMO - San Diego Care Locations</h1>
 </div>
 
 
@@ -68,34 +68,97 @@ ul.task-list li input[type="checkbox"] {
 <pre class="shinylive-r" data-engine="r"><code>#| standalone: true
 #| viewerHeight: 750
 
+library(dplyr)
 library(shiny)
 library(bslib)
 library(sf)
 library(leaflet)
 
+services_standard &lt;- read.csv("https://raw.githubusercontent.com/SD-LBCWG/HIV-Care-Map/prototype/data/SanDiego_Demo_Services.csv")
+
 # Define UI
 ui &lt;- page_sidebar(
-  sidebar = sidebar(open = "open",
-                    numericInput("n", "Sample count", 100),
-                    checkboxInput("pause", "Pause", FALSE),
-  ),
-  leafletOutput("mapTestingSites")
+  titlePanel("DEMO - HIV Care Locations"),
+  sidebar = sidebar(
+    open = "open",
+    radioButtons("mobile", HTML("&lt;b&gt;Site type:&lt;/b&gt;"),
+                 choices = list("All" = "All", "Mobile" = "Yes", "Not mobile" = "No"),
+                 selected = "All"),
+    checkboxGroupInput("services", HTML("&lt;b&gt;Available services:&lt;/b&gt;"),
+            choices = setNames(services_standard$ID, services_standard$Name)),
+    HTML("&lt;br/&gt;&lt;b&gt;&lt;u&gt;Regular hours&lt;/u&gt;&lt;/b&gt;"),
+    checkboxGroupInput("regDays",
+                       HTML("&lt;b&gt;Days open:&lt;/b&gt;"),
+                       choices = list("Monday" = "Mon",
+                                      "Tuesday" = "Tue", 
+                                      "Wednesday" = "Wed", 
+                                      "Thursday" = "Thu", 
+                                      "Friday" = "Fri")),
+    sliderInput("regHours", "Times open",
+              min = as.POSIXct("08:00", format="%H:%M", tz = "America/Los_Angeles"),
+              max = as.POSIXct("18:30", format="%H:%M", tz = "America/Los_Angeles"),
+              value = c(as.POSIXct("08:00", format="%H:%M", tz = "America/Los_Angeles"), 
+                        as.POSIXct("18:30", format="%H:%M", tz = "America/Los_Angeles")),
+              timeFormat = "%H:%M",
+              step = 1800, # 1800 seconds = 30 minutes
+              ticks = FALSE,
+              animate = TRUE), # Set to TRUE if you want to display ticks
+    textOutput("selectedTimeRange")
+    ),
+    leafletOutput("mapTestingSites")
 )
 
-# Define server logic
-server &lt;- function(input, output) {
-  
-  testing_sites &lt;- read.csv("https://raw.githubusercontent.com/SD-LBCWG/HIV-Care-Map/prototype/data/SanDiego_Testing_Sites_20240502.csv")
-  
-  testing_map &lt;- testing_sites |&gt;
-    leaflet() |&gt;
-    addProviderTiles("CartoDB.Positron") |&gt;
-    addMarkers(data = testing_sites, lng = ~ Longitude, lat = ~ Latitude, popup = ~ Name)
+# Define server logic required to draw a histogram
+server &lt;- function(input, output, session) {  
+  # Get services site data
+  service_sites &lt;- read.csv("https://raw.githubusercontent.com/SD-LBCWG/HIV-Care-Map/prototype/data/SanDiego_Demo_Locations.csv")
   
   output$mapTestingSites &lt;- renderLeaflet({
-    testing_map
+    if (is.null(input$services)) {
+      filtered_sites &lt;- service_sites
+    } else {
+      filtered_sites &lt;- service_sites[service_sites$StandardServices %in% input$services, ]
+    }
+    
+    # Whether site is mobile site
+    if (input$mobile != "All") {
+      filtered_sites &lt;- filtered_sites[filtered_sites$Mobile == input$mobile, ]
+    }
+    
+    # Days site is open
+    if (!is.null(input$regDays)) {
+      filtered_sites &lt;- filtered_sites[filtered_sites$RegDay %in% input$regDays, ]
+    }
+
+    # Hours site is open
+    # Time filtering based on slider input    
+    start_time &lt;- format(input$regHours[1], "%H:%M", tz = "America/Los_Angeles")
+    end_time &lt;- format(input$regHours[2], "%H:%M", tz = "America/Los_Angeles")
+    
+    # For testing
+    # output$selectedTimeRange &lt;- renderText({
+    #   paste("Selected Time Range: ", start_time, " - ", end_time)
+    # })
+    
+    filtered_sites &lt;- filtered_sites[filtered_sites$RegStart &lt;= end_time &amp; filtered_sites$RegEnd &gt;= start_time, ]    
+
+    filtered_sites &lt;- filtered_sites %&gt;%
+      group_by(ID) %&gt;%
+      arrange(ID) %&gt;%
+      slice(1) %&gt;%
+      ungroup()
+    
+    # Create the map with filtered sites
+    leaflet(filtered_sites) %&gt;%
+      addProviderTiles("CartoDB.Positron") %&gt;%
+      addCircleMarkers(
+        lng = ~Longitude, lat = ~Latitude,
+        popup = ~Name,                 
+        fillColor = ifelse(filtered_sites$Mobile == "Yes", "goldenrod", "darkblue"),
+        fillOpacity = 1,
+        stroke = FALSE
+      )
   })
-  
 }
 
 # Run the application

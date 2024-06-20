@@ -1,19 +1,73 @@
-﻿ID,Name,Zipcode,Address,City,Latitude,Longitude,Mobile,ExtraHours,StandardServices
-1,Family Health Centers - Beach Area,92109,3705 Mission Blvd,San Diego,32.78295413,-117.2522259,No,Yes,1
-2,Family Health Centers - Chase Avenue,92020,1111 W. Chase Ave,El Cajon,32.78153086,-116.9766735,No,No,2
-3,Family Health Centers - Chula Vista,91910,251 Landis Ave,Chula Vista,32.64283276,-117.0812912,No,Yes,3
-4,Family Health Centers - City College,92101,1550 Broadway,San Diego,32.71613174,-117.1497756,No,No,4
-5,Family Health Centers - City Heights,92115,5454 El Cajon Blvd,San Diego,32.75857302,-117.0778024,No,No,5
-6,Family Health Centers - Downtown @ Connections,92101,1250 6th Avenue #100,San Diego,32.71877866,-117.1595468,No,No,1
-7,Family Health Centers - El Cajon,92020,525 E Main St,El Cajon,32.79474646,-116.9560719,No,No,2
-8,Family Health Centers - Elm Street,92101,140 Elm Street,San Diego,32.72448909,-117.1632274,No,No,3
-9,Family Health Centers - Hillcrest,92103,4094 4th Ave,San Diego,32.75195528,-117.1620627,No,No,4
-10,Family Health Centers - HIV Coordinated Services & Prevention Center,92104,4040 30th St,San Diego,32.75135715,-117.1305288,No,Yes,5
-11,Family Health Centers - Ibarra,92105,4874 Polk Avenue,San Diego,32.751905,-117.0892167,No,No,2
-12,Family Health Centers - Lemon Grove,91945,7592 Broadway,Lemon Grove,32.74322535,-117.0347674,No,No,3
-13,Family Health Centers - National City,91950,1000 Euclid Ave,National City,32.68076965,-117.0807747,No,No,1
-14,Family Health Centers - North Park,92104,3544 30th St,San Diego,32.74329428,-117.1303342,No,No,2
-15,Mobile Clinic - Location 1,92105,5160 Federal Blvd,San Diego,32.72219081,-117.0835794,Yes,No,1
-16,Mobile Clinic  - Location 2,91911,352 L St,Chula Vista,32.61968548,-117.0747464,Yes,No,1
-17,Mobile Clinic  - Location 3,92102,2391 Island Avenue,San Diego,32.71038951,-117.1426644,Yes,No,1
-18,Mobile Clinic  - Location 4,92103,4094 4th Ave,San Diego,32.75192821,-117.1619661,Yes,No,1
+﻿ID,Name,Zipcode,Address,City,Latitude,Longitude,Mobile,ExtraHours,StandardServices,RegDay,RegStart,RegEnd
+1,Family Health Centers - Beach Area,92109,3705 Mission Blvd,San Diego,32.78295413,-117.2522259,No,Yes,1,Mon,08:00,16:00
+1,Family Health Centers - Beach Area,92109,3705 Mission Blvd,San Diego,32.78295413,-117.2522259,No,Yes,1,Tue,08:00,16:00
+1,Family Health Centers - Beach Area,92109,3705 Mission Blvd,San Diego,32.78295413,-117.2522259,No,Yes,1,Wed,08:00,16:00
+1,Family Health Centers - Beach Area,92109,3705 Mission Blvd,San Diego,32.78295413,-117.2522259,No,Yes,1,Thu,08:00,16:00
+1,Family Health Centers - Beach Area,92109,3705 Mission Blvd,San Diego,32.78295413,-117.2522259,No,Yes,1,Fri,08:00,16:00
+2,Family Health Centers - Chase Avenue,92020,1111 W. Chase Ave,El Cajon,32.78153086,-116.9766735,No,No,2,Mon,08:30,16:30
+2,Family Health Centers - Chase Avenue,92020,1111 W. Chase Ave,El Cajon,32.78153086,-116.9766735,No,No,2,Tue,08:30,16:30
+2,Family Health Centers - Chase Avenue,92020,1111 W. Chase Ave,El Cajon,32.78153086,-116.9766735,No,No,2,Wed,08:30,16:30
+2,Family Health Centers - Chase Avenue,92020,1111 W. Chase Ave,El Cajon,32.78153086,-116.9766735,No,No,2,Thu,08:30,16:30
+2,Family Health Centers - Chase Avenue,92020,1111 W. Chase Ave,El Cajon,32.78153086,-116.9766735,No,No,2,Fri,08:30,16:30
+3,Family Health Centers - Chula Vista,91910,251 Landis Ave,Chula Vista,32.64283276,-117.0812912,No,Yes,3,Mon,08:00,16:30
+3,Family Health Centers - Chula Vista,91910,251 Landis Ave,Chula Vista,32.64283276,-117.0812912,No,Yes,3,Tue,08:00,16:30
+3,Family Health Centers - Chula Vista,91910,251 Landis Ave,Chula Vista,32.64283276,-117.0812912,No,Yes,3,Wed,08:00,16:30
+3,Family Health Centers - Chula Vista,91910,251 Landis Ave,Chula Vista,32.64283276,-117.0812912,No,Yes,3,Thu,08:00,16:30
+3,Family Health Centers - Chula Vista,91910,251 Landis Ave,Chula Vista,32.64283276,-117.0812912,No,Yes,3,Fri,08:00,16:30
+4,Family Health Centers - City College,92101,1550 Broadway,San Diego,32.71613174,-117.1497756,No,No,4,Mon,08:30,16:30
+4,Family Health Centers - City College,92101,1550 Broadway,San Diego,32.71613174,-117.1497756,No,No,4,Tue,08:30,16:30
+4,Family Health Centers - City College,92101,1550 Broadway,San Diego,32.71613174,-117.1497756,No,No,4,Wed,08:30,16:30
+4,Family Health Centers - City College,92101,1550 Broadway,San Diego,32.71613174,-117.1497756,No,No,4,Thu,08:30,16:30
+4,Family Health Centers - City College,92101,1550 Broadway,San Diego,32.71613174,-117.1497756,No,No,4,Fri,08:30,16:30
+5,Family Health Centers - City Heights,92115,5454 El Cajon Blvd,San Diego,32.75857302,-117.0778024,No,No,5,Mon,08:00,16:30
+5,Family Health Centers - City Heights,92115,5454 El Cajon Blvd,San Diego,32.75857302,-117.0778024,No,No,5,Tue,08:00,16:30
+5,Family Health Centers - City Heights,92115,5454 El Cajon Blvd,San Diego,32.75857302,-117.0778024,No,No,5,Thu,08:00,16:30
+5,Family Health Centers - City Heights,92115,5454 El Cajon Blvd,San Diego,32.75857302,-117.0778024,No,No,5,Fri,08:00,16:30
+6,Family Health Centers - Downtown @ Connections,92101,1250 6th Avenue #100,San Diego,32.71877866,-117.1595468,No,No,1,Mon,08:30,16:30
+6,Family Health Centers - Downtown @ Connections,92101,1250 6th Avenue #100,San Diego,32.71877866,-117.1595468,No,No,1,Tue,08:30,16:30
+6,Family Health Centers - Downtown @ Connections,92101,1250 6th Avenue #100,San Diego,32.71877866,-117.1595468,No,No,1,Wed,08:30,16:30
+6,Family Health Centers - Downtown @ Connections,92101,1250 6th Avenue #100,San Diego,32.71877866,-117.1595468,No,No,1,Thu,08:30,16:30
+6,Family Health Centers - Downtown @ Connections,92101,1250 6th Avenue #100,San Diego,32.71877866,-117.1595468,No,No,1,Fri,08:30,16:30
+7,Family Health Centers - El Cajon,92020,525 E Main St,El Cajon,32.79474646,-116.9560719,No,No,2,Mon,09:00,17:00
+7,Family Health Centers - El Cajon,92020,525 E Main St,El Cajon,32.79474646,-116.9560719,No,No,2,Tue,09:00,17:00
+7,Family Health Centers - El Cajon,92020,525 E Main St,El Cajon,32.79474646,-116.9560719,No,No,2,Wed,09:00,17:00
+7,Family Health Centers - El Cajon,92020,525 E Main St,El Cajon,32.79474646,-116.9560719,No,No,2,Thu,09:00,17:00
+7,Family Health Centers - El Cajon,92020,525 E Main St,El Cajon,32.79474646,-116.9560719,No,No,2,Fri,09:00,17:00
+8,Family Health Centers - Elm Street,92101,140 Elm Street,San Diego,32.72448909,-117.1632274,No,No,3,Mon,09:00,17:00
+8,Family Health Centers - Elm Street,92101,140 Elm Street,San Diego,32.72448909,-117.1632274,No,No,3,Tue,09:00,17:00
+8,Family Health Centers - Elm Street,92101,140 Elm Street,San Diego,32.72448909,-117.1632274,No,No,3,Wed,09:00,17:00
+8,Family Health Centers - Elm Street,92101,140 Elm Street,San Diego,32.72448909,-117.1632274,No,No,3,Thu,09:00,17:00
+8,Family Health Centers - Elm Street,92101,140 Elm Street,San Diego,32.72448909,-117.1632274,No,No,3,Fri,09:00,17:00
+9,Family Health Centers - Hillcrest,92103,4094 4th Ave,San Diego,32.75195528,-117.1620627,No,No,4,Mon,09:00,17:00
+9,Family Health Centers - Hillcrest,92103,4094 4th Ave,San Diego,32.75195528,-117.1620627,No,No,4,Tue,09:00,17:00
+9,Family Health Centers - Hillcrest,92103,4094 4th Ave,San Diego,32.75195528,-117.1620627,No,No,4,Wed,09:00,17:00
+9,Family Health Centers - Hillcrest,92103,4094 4th Ave,San Diego,32.75195528,-117.1620627,No,No,4,Thu,09:00,17:00
+9,Family Health Centers - Hillcrest,92103,4094 4th Ave,San Diego,32.75195528,-117.1620627,No,No,4,Fri,09:00,17:00
+10,Family Health Centers - HIV Coordinated Services & Prevention Center,92104,4040 30th St,San Diego,32.75135715,-117.1305288,No,Yes,5,Mon,08:00,16:30
+10,Family Health Centers - HIV Coordinated Services & Prevention Center,92104,4040 30th St,San Diego,32.75135715,-117.1305288,No,Yes,5,Tue,08:00,16:30
+10,Family Health Centers - HIV Coordinated Services & Prevention Center,92104,4040 30th St,San Diego,32.75135715,-117.1305288,No,Yes,5,Wed,08:00,16:30
+10,Family Health Centers - HIV Coordinated Services & Prevention Center,92104,4040 30th St,San Diego,32.75135715,-117.1305288,No,Yes,5,Thu,08:00,16:30
+10,Family Health Centers - HIV Coordinated Services & Prevention Center,92104,4040 30th St,San Diego,32.75135715,-117.1305288,No,Yes,5,Fri,08:00,16:30
+11,Family Health Centers - Ibarra,92105,4874 Polk Avenue,San Diego,32.751905,-117.0892167,No,No,2,Mon,08:30,16:30
+11,Family Health Centers - Ibarra,92105,4874 Polk Avenue,San Diego,32.751905,-117.0892167,No,No,2,Tue,08:30,16:30
+11,Family Health Centers - Ibarra,92105,4874 Polk Avenue,San Diego,32.751905,-117.0892167,No,No,2,Wed,08:30,16:30
+11,Family Health Centers - Ibarra,92105,4874 Polk Avenue,San Diego,32.751905,-117.0892167,No,No,2,Thu,08:30,16:30
+11,Family Health Centers - Ibarra,92105,4874 Polk Avenue,San Diego,32.751905,-117.0892167,No,No,2,Fri,08:30,16:30
+12,Family Health Centers - Lemon Grove,91945,7592 Broadway,Lemon Grove,32.74322535,-117.0347674,No,No,3,Mon,08:00,16:30
+12,Family Health Centers - Lemon Grove,91945,7592 Broadway,Lemon Grove,32.74322535,-117.0347674,No,No,3,Tue,08:00,16:30
+12,Family Health Centers - Lemon Grove,91945,7592 Broadway,Lemon Grove,32.74322535,-117.0347674,No,No,3,Wed,08:00,16:30
+12,Family Health Centers - Lemon Grove,91945,7592 Broadway,Lemon Grove,32.74322535,-117.0347674,No,No,3,Thu,08:00,16:30
+12,Family Health Centers - Lemon Grove,91945,7592 Broadway,Lemon Grove,32.74322535,-117.0347674,No,No,3,Fri,08:00,16:30
+13,Family Health Centers - National City,91950,1000 Euclid Ave,National City,32.68076965,-117.0807747,No,No,1,Mon,08:30,16:30
+13,Family Health Centers - National City,91950,1000 Euclid Ave,National City,32.68076965,-117.0807747,No,No,1,Tue,08:30,16:30
+13,Family Health Centers - National City,91950,1000 Euclid Ave,National City,32.68076965,-117.0807747,No,No,1,Wed,08:30,16:30
+13,Family Health Centers - National City,91950,1000 Euclid Ave,National City,32.68076965,-117.0807747,No,No,1,Thu,08:30,16:30
+13,Family Health Centers - National City,91950,1000 Euclid Ave,National City,32.68076965,-117.0807747,No,No,1,Fri,08:30,16:30
+14,Family Health Centers - North Park,92104,3544 30th St,San Diego,32.74329428,-117.1303342,No,No,2,Mon,08:00,16:30
+14,Family Health Centers - North Park,92104,3544 30th St,San Diego,32.74329428,-117.1303342,No,No,2,Tue,08:00,16:30
+14,Family Health Centers - North Park,92104,3544 30th St,San Diego,32.74329428,-117.1303342,No,No,2,Wed,08:00,16:30
+14,Family Health Centers - North Park,92104,3544 30th St,San Diego,32.74329428,-117.1303342,No,No,2,Thu,08:00,16:30
+15,Mobile Clinic - Location 1,92105,5160 Federal Blvd,San Diego,32.72219081,-117.0835794,Yes,No,1,Tue,10:00,14:00
+16,Mobile Clinic  - Location 2,91911,352 L St,Chula Vista,32.61968548,-117.0747464,Yes,No,1,Wed,11:30,15:00
+17,Mobile Clinic  - Location 3,92102,2391 Island Avenue,San Diego,32.71038951,-117.1426644,Yes,No,1,Thu,14:30,18:30
+18,Mobile Clinic  - Location 4,92103,4094 4th Ave,San Diego,32.75192821,-117.1619661,Yes,No,1,Fri,11:00,15:00
