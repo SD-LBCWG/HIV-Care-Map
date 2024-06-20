@@ -1,0 +1,48 @@
+---
+title: "HIV Services in San Diego"
+format:
+  html:
+    page-layout: custom
+    resources:
+      - shinylive-sw.js
+filters:
+  - shinylive
+---
+
+```{shinylive-r}
+#| standalone: true
+#| viewerHeight: 750
+
+library(shiny)
+library(bslib)
+library(sf)
+library(leaflet)
+
+# Define UI
+ui <- page_sidebar(
+  sidebar = sidebar(open = "open",
+                    numericInput("n", "Sample count", 100),
+                    checkboxInput("pause", "Pause", FALSE),
+  ),
+  leafletOutput("mapTestingSites")
+)
+
+# Define server logic
+server <- function(input, output) {
+  
+  testing_sites <- read.csv("https://raw.githubusercontent.com/SD-LBCWG/HIV-Care-Map/prototype/data/SanDiego_Testing_Sites_20240502.csv")
+  
+  testing_map <- testing_sites |>
+    leaflet() |>
+    addProviderTiles("CartoDB.Positron") |>
+    addMarkers(data = testing_sites, lng = ~ Longitude, lat = ~ Latitude, popup = ~ Name)
+  
+  output$mapTestingSites <- renderLeaflet({
+    testing_map
+  })
+  
+}
+
+# Run the application
+shinyApp(ui = ui, server = server)
+```
