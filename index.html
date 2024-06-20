@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>HIV Services in San Diego</title>
+<title>DEMO - San Diego Care Locations</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -48,7 +48,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">HIV Services in San Diego</h1>
+<h1 class="title">DEMO - San Diego Care Locations</h1>
 </div>
 
 
@@ -73,29 +73,49 @@ library(bslib)
 library(sf)
 library(leaflet)
 
+services_standard &lt;- read.csv("https://raw.githubusercontent.com/SD-LBCWG/HIV-Care-Map/prototype/data/SanDiego_Demo_Services.csv")
+
 # Define UI
 ui &lt;- page_sidebar(
-  sidebar = sidebar(open = "open",
-                    numericInput("n", "Sample count", 100),
-                    checkboxInput("pause", "Pause", FALSE),
+  sidebar = sidebar(
+    open = "open",
+    radioButtons("mobile", HTML("&lt;b&gt;Site type:&lt;/b&gt;"),
+                 choices = list("All" = "All", "Mobile" = "Yes", "Not mobile" = "No"),
+                 selected = "All"),
+    checkboxGroupInput("services", HTML("&lt;b&gt;Available services:&lt;/b&gt;"),
+            choices = setNames(services_standard$ID, services_standard$Name))
   ),
   leafletOutput("mapTestingSites")
 )
 
-# Define server logic
-server &lt;- function(input, output) {
-  
-  testing_sites &lt;- read.csv("https://raw.githubusercontent.com/SD-LBCWG/HIV-Care-Map/prototype/data/SanDiego_Testing_Sites_20240502.csv")
-  
-  testing_map &lt;- testing_sites |&gt;
-    leaflet() |&gt;
-    addProviderTiles("CartoDB.Positron") |&gt;
-    addMarkers(data = testing_sites, lng = ~ Longitude, lat = ~ Latitude, popup = ~ Name)
+# Define server logic required to draw a histogram
+server &lt;- function(input, output, session) {  
+  # Get testing site data
+  testing_sites &lt;- read.csv("https://raw.githubusercontent.com/SD-LBCWG/HIV-Care-Map/prototype/data/SanDiego_Demo_Locations.csv")
   
   output$mapTestingSites &lt;- renderLeaflet({
-    testing_map
+    if (is.null(input$services)) {
+      filtered_sites &lt;- testing_sites
+    } else {
+      filtered_sites &lt;- testing_sites[testing_sites$StandardServices %in% input$services, ]
+    }
+    
+    # Whether site is mobile site
+    if (input$mobile != "All") {
+      filtered_sites &lt;- filtered_sites[filtered_sites$Mobile == input$mobile, ]
+    }
+    
+    # Create the map with filtered sites
+    leaflet(filtered_sites) %&gt;%
+      addProviderTiles("CartoDB.Positron") %&gt;%
+      addCircleMarkers(
+        lng = ~Longitude, lat = ~Latitude,
+        popup = ~Name,                 
+        fillColor = ifelse(filtered_sites$Mobile == "Yes", "goldenrod", "darkblue"),
+        fillOpacity = 1,
+        stroke = FALSE
+      )
   })
-  
 }
 
 # Run the application
