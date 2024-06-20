@@ -1,0 +1,6 @@
+﻿"Submission Date","Full name",Email,"Name of clinic","Is this a mobile clinic?",Address,"What are the regular hours?","Are evening or weekend hours offered?","(User-add select) Which services are offered during regular hours?","What are the extended hours?","Which services are offered during extended hours?","(Visual select) Which services are offered during regular hours?","Which services does the mobile clinic offer?","Is the mobile clinic on a set schedule?","Mobile Location 1","When is the clinic at Location 1?","Add another location?","Mobile Location 2","When is the clinic at Location 2?","Add another location?","Mobile Location 3","When is the clinic at Location 3?","Add another location?","Mobile Location 4","When is the clinic at Location 4?","Add another location?","Mobile Location 5","When is the clinic at Location 5?","Additional information not covered by previous questions:"
+"May 10, 2024",MT,mitruong@ucsd.edu,"Test Clinic",YES,,,,,,,,"Option 2",YES,"123 DIckonson St San DIego, Ca, 92103","Frequency: Monthly, Day: Monday, Open: 08:00, Close: 09:00
+",NO,,,NO,,,,,,,,,Test
+"May 10, 2024",MT,miturong@ucsd.edu,"Test clinic",NO,"123 Dickinson san DIego, CA, 92123","Day: Monday, Open: 08:00, Close: 09:00
+",NO,,,,"Option 2
+Option 3",,,,,,,,,,,,,,,,,"Test test"

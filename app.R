@@ -8,58 +8,54 @@
 #
 
 library(here)
-library(tidyverse)
 library(shiny)
+library(bslib)
+library(sf)
 library(leaflet)
 
-# Define UI for application that draws a histogram
-ui <- fluidPage(
+services_standard <- read.csv(here("data", "SanDiego_Demo_Services.csv"))
 
-    # Application title
-    titlePanel("San Diego Demo Map"),
-
-    # Sidebar with a slider input for number of bins 
-    sidebarLayout(
-        sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
-        ),
-
-        # Show map of San Diego zipcodes and testing sites
-        mainPanel(
-           leafletOutput("mapTestingSites", height = 700)
-        )
-    )
+# Define UI
+ui <- page_sidebar(
+  titlePanel("DEMO - HIV Care Locations"),
+  sidebar = sidebar(
+    open = "open",
+    radioButtons("mobile", HTML("<b>Site type:</b>"),
+                 choices = list("All" = "All", "Mobile" = "Yes", "Not mobile" = "No"),
+                 selected = "All"),
+    checkboxGroupInput("services", HTML("<b>Available services:</b>"),
+            choices = setNames(services_standard$ID, services_standard$Name))
+  ),
+  leafletOutput("mapTestingSites")
 )
 
 # Define server logic required to draw a histogram
-server <- function(input, output, session) {
-  
-  # San Diego zipcode shapefile
-  sd_zip_shp <- sf::st_read(here("shapefile", "geo_sdcounty.shp"))
-  
+server <- function(input, output, session) {  
   # Get testing site data
-  testing_sites <- read.csv(here("data", "SanDiego_Testing_Sites_20240502.csv"))
+  testing_sites <- read.csv(here("data", "SanDiego_Demo_Locations.csv"))  
   
-  testing_map <- testing_sites |> 
-    leaflet() |> 
-    addProviderTiles("CartoDB.Positron") |> 
-    addPolygons(data = sd_zip_shp,
-                weight = 0.5,
-                color = "#333",
-                fillOpacity = 0.3,
-                smoothFactor = 0.5,
-                highlightOptions = highlightOptions(weight = 2.0,
-                                                    color = "#FFF"),
-                label = ~ zip) |> 
-    addMarkers(data = testing_sites, lng = ~ Longitude, lat = ~ Latitude, popup = ~ Name)
-  
-
   output$mapTestingSites <- renderLeaflet({
-    testing_map
+    if (is.null(input$services)) {
+      filtered_sites <- testing_sites
+    } else {
+      filtered_sites <- testing_sites[testing_sites$StandardServices %in% input$services, ]
+    }
+    
+    # Whether site is mobile site
+    if (input$mobile != "All") {
+      filtered_sites <- filtered_sites[filtered_sites$Mobile == input$mobile, ]
+    }
+    
+    # Create the map with filtered sites
+    leaflet(filtered_sites) %>%
+      addProviderTiles("CartoDB.Positron") %>%
+      addCircleMarkers(
+        lng = ~Longitude, lat = ~Latitude,
+        popup = ~Name,                 
+        fillColor = ifelse(filtered_sites$Mobile == "Yes", "goldenrod", "darkblue"),
+        fillOpacity = 1,
+        stroke = FALSE
+      )
   })
 }
 
