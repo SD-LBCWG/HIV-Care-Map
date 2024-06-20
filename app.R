@@ -52,7 +52,7 @@ ui <- page_sidebar(
     #           timeFormat = "%H:%M",
     #           step = 1800, # 1800 seconds = 30 minutes
     #           ticks = FALSE), # Set to TRUE if you want to display ticks
-  sliderInput("regHours", "Times open",
+  sliderInput("regHours", HTML("<b>Times open:</b>"),
             min = as.POSIXct("08:00", format="%H:%M", tz = "America/Los_Angeles"),
             max = as.POSIXct("18:30", format="%H:%M", tz = "America/Los_Angeles"),
             value = c(as.POSIXct("08:00", format="%H:%M", tz = "America/Los_Angeles"), 

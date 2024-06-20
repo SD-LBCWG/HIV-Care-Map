@@ -1,5 +1,4 @@
 ---
-title: "DEMO - San Diego Care Locations"
 format:
   html:
     page-layout: custom
@@ -11,9 +10,8 @@ filters:
 
 ```{shinylive-r}
 #| standalone: true
-#| viewerHeight: 750
+#| viewerHeight: 850
 
-library(dplyr)
 library(shiny)
 library(bslib)
 library(sf)
@@ -39,7 +37,7 @@ ui <- page_sidebar(
                                       "Wednesday" = "Wed", 
                                       "Thursday" = "Thu", 
                                       "Friday" = "Fri")),
-    sliderInput("regHours", "Times open",
+    sliderInput("regHours", HTML("<b>Times open:</b>"),
               min = as.POSIXct("08:00", format="%H:%M", tz = "America/Los_Angeles"),
               max = as.POSIXct("18:30", format="%H:%M", tz = "America/Los_Angeles"),
               value = c(as.POSIXct("08:00", format="%H:%M", tz = "America/Los_Angeles"), 
@@ -85,13 +83,7 @@ server <- function(input, output, session) {
     #   paste("Selected Time Range: ", start_time, " - ", end_time)
     # })
     
-    filtered_sites <- filtered_sites[filtered_sites$RegStart <= end_time & filtered_sites$RegEnd >= start_time, ]    
-
-    filtered_sites <- filtered_sites %>%
-      group_by(ID) %>%
-      arrange(ID) %>%
-      slice(1) %>%
-      ungroup()
+    filtered_sites <- filtered_sites[filtered_sites$RegStart <= end_time & filtered_sites$RegEnd >= start_time, ]
     
     # Create the map with filtered sites
     leaflet(filtered_sites) %>%

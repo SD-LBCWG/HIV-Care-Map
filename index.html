@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>DEMO - San Diego Care Locations</title>
+<title>index</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -46,29 +46,12 @@ ul.task-list li input[type="checkbox"] {
 
 <div class="page-layout-custom">  
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">DEMO - San Diego Care Locations</h1>
-</div>
 
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
 
 
 <pre class="shinylive-r" data-engine="r"><code>#| standalone: true
-#| viewerHeight: 750
+#| viewerHeight: 850
 
-library(dplyr)
 library(shiny)
 library(bslib)
 library(sf)
@@ -94,7 +77,7 @@ ui &lt;- page_sidebar(
                                       "Wednesday" = "Wed", 
                                       "Thursday" = "Thu", 
                                       "Friday" = "Fri")),
-    sliderInput("regHours", "Times open",
+    sliderInput("regHours", HTML("&lt;b&gt;Times open:&lt;/b&gt;"),
               min = as.POSIXct("08:00", format="%H:%M", tz = "America/Los_Angeles"),
               max = as.POSIXct("18:30", format="%H:%M", tz = "America/Los_Angeles"),
               value = c(as.POSIXct("08:00", format="%H:%M", tz = "America/Los_Angeles"), 
@@ -140,13 +123,7 @@ server &lt;- function(input, output, session) {
     #   paste("Selected Time Range: ", start_time, " - ", end_time)
     # })
     
-    filtered_sites &lt;- filtered_sites[filtered_sites$RegStart &lt;= end_time &amp; filtered_sites$RegEnd &gt;= start_time, ]    
-
-    filtered_sites &lt;- filtered_sites %&gt;%
-      group_by(ID) %&gt;%
-      arrange(ID) %&gt;%
-      slice(1) %&gt;%
-      ungroup()
+    filtered_sites &lt;- filtered_sites[filtered_sites$RegStart &lt;= end_time &amp; filtered_sites$RegEnd &gt;= start_time, ]
     
     # Create the map with filtered sites
     leaflet(filtered_sites) %&gt;%
